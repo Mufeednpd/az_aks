@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: webapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: nginx
+        ports: 
+        - containerPort: 80
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-lb
+spec:
+  type: NodePort
+  selector:
+    app: webapp
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+
+
+kubectl expose deploy nginx --type=NodePort --port=80 --target-port=80
