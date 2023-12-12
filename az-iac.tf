@@ -13,15 +13,15 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "azlab" {
-  name     = "azlab"
+resource "azurerm_resource_group" "devlab" {
+  name     = "devlab"
   location = "West Europe"
 }
 
 resource "azurerm_kubernetes_cluster" "azaks" {
   name                = "azaks"
   location            = azurerm_resource_group.azlab.location
-  resource_group_name = azurerm_resource_group.azlab.name
+  resource_group_name = azurerm_resource_group.devlab.name
   dns_prefix          = "aksdns"
 
   default_node_pool {
