@@ -20,7 +20,7 @@ resource "azurerm_resource_group" "devlab" {
 
 resource "azurerm_kubernetes_cluster" "azaks" {
   name                = "azaks"
-  location            = azurerm_resource_group.azlab.location
+  location            = azurerm_resource_group.devlab.location
   resource_group_name = azurerm_resource_group.devlab.name
   dns_prefix          = "aksdns"
 
